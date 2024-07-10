@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('property', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255)->nullable(false)->unique();
+            $table->unsignedInteger('price');
+            $table->unsignedTinyInteger('bedrooms');
+            $table->unsignedTinyInteger('bathrooms');
+            $table->unsignedTinyInteger('storeys');
+            $table->unsignedTinyInteger('garages');
             $table->timestamps();
         });
     }
