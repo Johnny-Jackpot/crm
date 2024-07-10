@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PropertyFactory extends Factory
 {
+    protected $model = Property::class;
+
     /**
      * Define the model's default state.
      *
@@ -18,7 +20,12 @@ class PropertyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'price' => fake()->numberBetween(263_604, 4_294_967_295),
+            'bedrooms' => fake()->numberBetween(0, 255),
+            'bathrooms' => fake()->numberBetween(0, 255),
+            'storeys' => fake()->numberBetween(0, 255),
+            'garages' => fake()->numberBetween(0, 255),
         ];
     }
 }
