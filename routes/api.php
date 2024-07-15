@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Resources\PropertyResource;
-use App\Models\Property;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/properties', function () {
-    return PropertyResource::collection(Property::paginate());
-});
+Route::apiResource('property', PropertyController::class)->only('index');
