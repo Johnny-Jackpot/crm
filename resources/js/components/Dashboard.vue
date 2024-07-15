@@ -1,7 +1,9 @@
 <script setup>
-
+import Form from './Form.vue';
+import Properties from './Properties.vue';
 </script>
 
 <template>
-<p>Dashboard</p>
+    <Form/>
+    <Properties/>
 </template>
