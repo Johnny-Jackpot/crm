@@ -24,7 +24,8 @@ class PropertyListRequest extends FormRequest
     {
         return [
             'name' => 'string',
-            'price' => 'numeric|gte:0',
+            'priceFrom' => 'numeric|gte:0',
+            'priceTo' => 'numeric|gte:0',
             'bedrooms' => 'numeric|gte:0',
             'bathrooms' => 'numeric|gte:0',
             'storeys' => 'numeric|gte:0',
