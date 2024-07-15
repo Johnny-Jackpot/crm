@@ -25,7 +25,7 @@ class Property extends Model
         $qb = self::query();
 
         if ($name) {
-            $qb->whereColumn('name', 'LIKE', "%$name%");
+            $qb->where('name', 'LIKE', "%$name%");
         }
 
         if ($priceFrom !== null) {
