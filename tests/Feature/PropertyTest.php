@@ -8,13 +8,15 @@ use Tests\TestCase;
 
 class PropertyTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
+    public function test_api_property_reachable(): void
     {
         $response = $this->get('/api/property');
-
         $response->assertStatus(200);
+    }
+
+    public function test_api_property_table_empty(): void
+    {
+        $response = $this->get('/api/property');
+        $response->assertJsonCount(0, 'data');
     }
 }
