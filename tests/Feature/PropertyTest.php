@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class PropertyTest extends TestCase
 {
+    use RefreshDatabase;
+
     private const API_URL = '/api/property';
 
     public function test_api_property_reachable(): void
