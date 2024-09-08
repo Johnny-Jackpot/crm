@@ -15,20 +15,29 @@ class PropertyTest extends TestCase
 
     public function test_api_property_reachable(): void
     {
-        $response = $this->get(self::API_URL);
+        $response = $this->getJson(self::API_URL);
         $response->assertStatus(200);
     }
 
     public function test_api_property_table_empty(): void
     {
-        $response = $this->get(self::API_URL);
+        $response = $this->getJson(self::API_URL);
         $response->assertJsonCount(0, 'data');
     }
 
     public function test_api_property_table_non_empty(): void
     {
         Property::factory()->count(1)->create();
-        $response = $this->get(self::API_URL);
+        $response = $this->getJson(self::API_URL);
         $response->assertJsonCount(1, 'data');
+    }
+
+    public function test_api_property_route_doesnt_contain_11th_record(): void
+    {
+        $properties = Property::factory(11)->create();
+        $lastProperty = $properties->last();
+        $this->getJson(self::API_URL)
+            ->assertStatus(200)
+            ->assertJsonPath('data', fn(array $data) => !collect($data)->contains($lastProperty->toArray()));
     }
 }

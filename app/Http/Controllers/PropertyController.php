@@ -24,6 +24,6 @@ class PropertyController extends Controller
             garages: $request->get('garages')
         );
 
-        return PropertyResource::collection($qb->paginate());
+        return PropertyResource::collection($qb->paginate(10));
     }
 }
