@@ -54,4 +54,13 @@ class PropertyTest extends TestCase
             ->assertStatus(200)
             ->assertJsonPath('data', fn(array $data) => !collect($data)->contains($lastProperty->toArray()));
     }
+
+    public function test_api_property_unauthenticated_user_cannot_access()
+    {
+        $this->getJson(self::API_URL)
+            ->assertStatus(401)
+            ->assertJson([
+                'error' => 'Unauthorized.'
+            ]);
+    }
 }
