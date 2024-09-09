@@ -3,4 +3,6 @@
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
-Route::apiResource('property', PropertyController::class)->only('index');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('property', PropertyController::class)->only('index');
+});
