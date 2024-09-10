@@ -21,6 +21,7 @@ class PropertyTest extends TestCase
 
         Sanctum::actingAs(
             User::factory()->create(),
+            ['view-property']
         );
     }
 
