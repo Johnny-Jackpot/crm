@@ -52,4 +52,32 @@ class PropertyTest extends TestCase
             ->assertStatus(200)
             ->assertJsonPath('data', fn(array $data) => !collect($data)->contains($lastProperty->toArray()));
     }
+
+    public function test_api_property_created_successful()
+    {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['store-property']
+        );
+
+        $data = [
+            'name' => 'Test property',
+            'price' => 1000,
+            'bedrooms' => 2,
+            'bathrooms' => 1,
+            'storeys' => 1,
+            'garages' => 0,
+        ];
+
+        $this->postJson(self::API_URL, $data)
+            ->assertStatus(201)
+            ->assertJsonFragment($data);
+
+        $this->assertDatabaseHas('properties', $data);
+
+        $lastProduct = Property::query()->latest()->first();
+        foreach ($data as $key => $value) {
+            $this->assertEquals($value, $lastProduct->$key);
+        }
+    }
 }

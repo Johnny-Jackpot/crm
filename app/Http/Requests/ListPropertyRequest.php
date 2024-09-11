@@ -16,12 +16,12 @@ class ListPropertyRequest extends FormRequest
     {
         return [
             'name' => 'string',
-            'priceFrom' => 'numeric|gt:0',
-            'priceTo' => 'numeric|gt:0',
-            'bedrooms' => 'numeric|gt:0',
-            'bathrooms' => 'numeric|gt:0',
-            'storeys' => 'numeric|gt:0',
-            'garages' => 'numeric|gt:0',
+            'priceFrom' => 'numeric|gte:0',
+            'priceTo' => 'numeric|gte:0',
+            'bedrooms' => 'numeric|gte:0',
+            'bathrooms' => 'numeric|gte:0',
+            'storeys' => 'numeric|gte:0',
+            'garages' => 'numeric|gte:0',
         ];
     }
 }

@@ -15,11 +15,11 @@ class StorePropertyRequest extends FormRequest
     {
         return [
             'name' => 'required|string|between:2,255|unique:App\Models\Property,name',
-            'price' => 'required|numeric|gt:0|lte:4294967295',
-            'bedrooms' => 'required|numeric|gt:0|lte:255',
-            'bathrooms' => 'required|numeric|gt:0|lte:255',
-            'storeys' => 'required|numeric|gt:0|lte:255',
-            'garages' => 'required|numeric|gt:0|lte:255',
+            'price' => 'required|numeric|gte:0|lte:4294967295',
+            'bedrooms' => 'required|numeric|gte:0|lte:255',
+            'bathrooms' => 'required|numeric|gte:0|lte:255',
+            'storeys' => 'required|numeric|gte:0|lte:255',
+            'garages' => 'required|numeric|gte:0|lte:255',
         ];
     }
 
