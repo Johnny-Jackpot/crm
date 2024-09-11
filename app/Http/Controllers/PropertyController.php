@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PropertyListRequest;
+use App\Http\Requests\ListPropertyRequest;
+use App\Http\Requests\StorePropertyRequest;
+use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -12,7 +14,7 @@ class PropertyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(PropertyListRequest $request): AnonymousResourceCollection
+    public function index(ListPropertyRequest $request): AnonymousResourceCollection
     {
         $qb = Property::selectList(
             name: $request->get('name'),
@@ -25,5 +27,26 @@ class PropertyController extends Controller
         );
 
         return PropertyResource::collection($qb->paginate(10));
+    }
+
+    public function store(StorePropertyRequest $request)
+    {
+        //
+    }
+
+    public function show(Property $property)
+    {
+        //
+    }
+
+    public function update(UpdatePropertyRequest $request, Property $property)
+    {
+        //
+    }
+
+
+    public function destroy(Property $property)
+    {
+        //
     }
 }
