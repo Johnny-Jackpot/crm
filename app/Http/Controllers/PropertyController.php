@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ListPropertyRequest;
 use App\Http\Requests\StorePropertyRequest;
-use App\Http\Requests\UpdatePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PropertyController extends Controller
+class PropertyController extends Controller implements HasMiddleware
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public static function middleware(): array
+    {
+        return [
+            'auth:sanctum',
+            new Middleware('abilities:view-property', only: ['index', 'show']),
+            new Middleware('abilities:store-property', only: ['store']),
+            new Middleware('abilities:update-property', only: ['update']),
+            new Middleware('abilities:delete-property', only: ['destroy']),
+        ];
+    }
+
     public function index(ListPropertyRequest $request): AnonymousResourceCollection
     {
         $qb = Property::selectList(
@@ -39,7 +48,7 @@ class PropertyController extends Controller
         //
     }
 
-    public function update(UpdatePropertyRequest $request, Property $property)
+    public function update(StorePropertyRequest $request, Property $property)
     {
         //
     }
