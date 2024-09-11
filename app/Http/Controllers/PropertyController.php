@@ -6,6 +6,7 @@ use App\Http\Requests\ListPropertyRequest;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Resources\PropertyResource;
 use App\Models\Property;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -38,24 +39,33 @@ class PropertyController extends Controller implements HasMiddleware
         return PropertyResource::collection($qb->paginate(10));
     }
 
-    public function store(StorePropertyRequest $request)
+    public function store(StorePropertyRequest $request): PropertyResource
     {
-        //
+        $property = Property::query()->create($request->getData());
+
+        return new PropertyResource($property);
     }
 
-    public function show(Property $property)
+    public function show(Property $property): PropertyResource
     {
-        //
+        return new PropertyResource($property);
     }
 
-    public function update(StorePropertyRequest $request, Property $property)
+    public function update(StorePropertyRequest $request, Property $property): PropertyResource
     {
-        //
+        $property->update($request->getData());
+
+        return new PropertyResource($property);
     }
 
-
-    public function destroy(Property $property)
+    public function destroy(Property $property): JsonResponse
     {
-        //
+        $property->delete();
+
+        return response()->json([
+            'meta' => [
+                'message' => 'Property deleted successfully',
+            ]
+        ]);
     }
 }

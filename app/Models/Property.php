@@ -13,6 +13,15 @@ class Property extends Model
 
     protected $table = 'properties';
 
+    protected $fillable = [
+        'name',
+        'price',
+        'bedrooms',
+        'bathrooms',
+        'storeys',
+        'garages',
+    ];
+
     public static function selectList(
         ?string $name = null,
         ?int    $priceFrom = null,

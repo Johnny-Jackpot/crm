@@ -15,11 +15,23 @@ class StorePropertyRequest extends FormRequest
     {
         return [
             'name' => 'required|string|between:2,255|unique:App\Models\Property,name',
-            'price' => 'numeric|gt:0',
-            'bedrooms' => 'numeric|gt:0',
-            'bathrooms' => 'numeric|gt:0',
-            'storeys' => 'numeric|gt:0',
-            'garages' => 'numeric|gt:0',
+            'price' => 'required|numeric|gt:0|lte:4294967295',
+            'bedrooms' => 'required|numeric|gt:0|lte:255',
+            'bathrooms' => 'required|numeric|gt:0|lte:255',
+            'storeys' => 'required|numeric|gt:0|lte:255',
+            'garages' => 'required|numeric|gt:0|lte:255',
         ];
+    }
+
+    public function getData(): array
+    {
+        return $this->only([
+            'name',
+            'price',
+            'bedrooms',
+            'bathrooms',
+            'storeys',
+            'garages',
+        ]);
     }
 }
