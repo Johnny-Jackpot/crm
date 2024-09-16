@@ -13,7 +13,7 @@ class PropertyTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const API_URL = '/api/property';
+    private const API_URL = '/api/property/';
 
     public function setUp(): void
     {
@@ -79,5 +79,18 @@ class PropertyTest extends TestCase
         foreach ($data as $key => $value) {
             $this->assertEquals($value, $lastProduct->$key);
         }
+    }
+
+    public function test_api_property_viewed_successfully()
+    {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['view-property']
+        );
+
+        $property = Property::factory()->create();
+        $this->getJson(self::API_URL . $property->id)
+            ->assertStatus(200)
+            ->assertJsonFragment($property->toArray());
     }
 }
