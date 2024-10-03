@@ -3,4 +3,4 @@
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
-Route::apiResource('property', PropertyController::class);
+Route::apiResource('properties', PropertyController::class);
