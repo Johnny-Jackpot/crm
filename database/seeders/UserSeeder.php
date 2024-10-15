@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         User::factory()->count(100)->create();
         User::factory()->count(1)->create([
+            'email' => 'admin@example.com',
             'roles' => [User::ROLE_ADMIN],
             'password' => Hash::make('admin'),
         ]);
