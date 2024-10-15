@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Property;
 
 use App\Models\Property;
 use App\Models\User;
@@ -13,7 +13,7 @@ class PropertyTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const API_URL = '/api/property/';
+    private const API_URL = '/api/properties/';
 
     public function setUp(): void
     {
