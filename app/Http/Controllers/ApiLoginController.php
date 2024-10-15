@@ -25,6 +25,6 @@ class ApiLoginController extends Controller
             return response()->json(['message' => 'Login successful.']);
         }
 
-        return response()->json(['error' => 'The provided credentials do not match our records.'], 401);
+        return response()->json(['message' => 'The provided credentials do not match our records.'], 401);
     }
 }
