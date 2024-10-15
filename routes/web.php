@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function () {
-    return response()->json();
-})->name('login');
+Route::get('login', [LoginController::class, 'authenticate'])->name('login');
