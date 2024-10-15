@@ -8,5 +8,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('properties', PropertyController::class);
 Route::apiResource('users', UserController::class)
-    ->only(['index', 'show'])
+    ->only(['index', 'store'])
     ->middleware(UserHasRoles::class . ':' . User::ROLE_ADMIN);
